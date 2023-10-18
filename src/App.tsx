@@ -21,11 +21,10 @@ function App() {
         const firstWord = fact.split(' ', 3).join(' ')
         console.log(firstWord);
 
-        fetch(`https://cataas.com/cat/says/${firstWord}?size=50&color=red&json=true`)
-            .then(res => res.json())
+        fetch(`https://cataas.com/cat/says/${firstWord}`)
             .then(response => {
-                const { url } = response;
-                setImageUrl(url);
+                const {url}: any = response
+                setImageUrl(url)
             })
     }, [fact])
 
@@ -36,7 +35,7 @@ function App() {
                 <p>{fact}</p>
             }
             {imageUrl &&
-                <img src={`${Global.CAT_PREFIX_IMAGE_URL}${imageUrl}`} alt={`Image extracted using the first three words for ${fact}`} />
+                <img src={imageUrl} alt={`Image extracted using the first three words for ${fact}`} />
             }
         </main>
     )
